@@ -8,25 +8,30 @@ const maxGuessesMessage = document.getElementById('max-guesses');
 const numberOfGuessesMessage = document.getElementById('number-of-guesses');
 const correctMessage = document.getElementById('correct');
 
+
 let targetNumber;
 let attempts = 0;
 const maxNumberOfAttempts = 5;
+
 
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+
 function checkGuess() {
   const guess = parseInt(guessInput.value, 10);
   attempts += 1;
 
+
   hideAllMessages();
+
 
   if (guess === targetNumber) {
     // Guessed correctly
     correctMessage.textContent = 'Guessed correctly';  // Update the message
     correctMessage.style.display = '';
-    numberOfGuessesMessage.style.display = 'none'; // Hide the number of guesses message 
+    numberOfGuessesMessage.style.display = 'none'; // Hide the number of guesses message
     submitButton.disabled = true;
     guessInput.disabled = true;
   } else {
@@ -43,6 +48,7 @@ function checkGuess() {
       guessInput.disabled = true;
     }
 
+
     if (guess < targetNumber) {
       tooLowMessage.style.display = '';
       tooLowMessage.textContent = 'Your guess is too low.';
@@ -52,8 +58,10 @@ function checkGuess() {
     }
   }
 
+
   guessInput.value = ''; // Clear the input field
 }
+
 
 function hideAllMessages() {
   const messages = document.querySelectorAll('.message');
@@ -63,6 +71,7 @@ function hideAllMessages() {
   });
 }
 
+
 function setup() {
   targetNumber = getRandomNumber(1, 100);
   attempts = 0;
@@ -71,16 +80,12 @@ function setup() {
   guessInput.value = '';
   hideAllMessages();
   resetButton.style.display = '';
-
-  // Create and add the element to display the random number
-  const displayElement = document.createElement('div');
-  displayElement.id = 'display-target-number'; // Assign an ID for potential styling or later reference
-  displayElement.textContent = `Debug: The random number is ${targetNumber}`; // Text to display the number
-  document.body.appendChild(displayElement); // add the element to the body 
 }
+
 
 submitButton.addEventListener('click', checkGuess);
 resetButton.addEventListener('click', setup);
+
 
 // Initialize the game when the page is loaded
 document.addEventListener('DOMContentLoaded', setup);
